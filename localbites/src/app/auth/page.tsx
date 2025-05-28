@@ -78,7 +78,7 @@ export default function AuthPage() {
           setMessage('Sign-up succeeded, but failed to create profile: ' + profileError.message)
         } else {
           setMessage('Success! Redirecting...')
-          router.push('/')
+          router.push('/customer')
         }
       } else {
         setMessage('Sign-up succeeded, but no user session found. Please log in manually.')
@@ -104,7 +104,7 @@ export default function AuthPage() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full placeholder:text-black text-black p-2 border rounded"
           required
         />
 
@@ -113,7 +113,7 @@ export default function AuthPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full placeholder:text-black text-black p-2 border rounded"
           required
         />
 
@@ -122,7 +122,7 @@ export default function AuthPage() {
             <select
               value={role}
               onChange={(e) => setRole(e.target.value as 'customer' | 'seller')}
-              className="w-full p-2 border rounded"
+              className="w-full text-black p-2 border rounded"
             >
               <option value="customer">Customer</option>
               <option value="seller">Seller</option>
@@ -133,7 +133,7 @@ export default function AuthPage() {
               value={restaurantName}
               onChange={(e) => setRestaurantName(e.target.value)}
               placeholder="Restaurant Name"
-              className="w-full p-2 border rounded"
+              className="w-full placeholder:text-black p-2 border rounded"
             />
           </>
         )}

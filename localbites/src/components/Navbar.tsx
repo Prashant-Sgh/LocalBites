@@ -8,11 +8,11 @@ export default function Navbar() {
     const pathname = usePathname()
 
     const navLinks = [
-        { label: 'Home', href: '/' },
-        { label: 'Our Menu', href: '/menu' },
-        { label: 'Foods', href: '/foods' },
-        { label: 'About us', href: '/about' },
-        { label: 'Contact us', href: '/contact' },
+        { label: 'Home', href: '/customer' },
+        { label: 'Seller dashboard', href: '/seller/dashboard' },
+        { label: 'My cart', href: '/cart' },
+        // { label: 'About us', href: '/about' },
+        // { label: 'Contact us', href: '/contact' },
     ]
 
     return (

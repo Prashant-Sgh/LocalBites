@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'  // Make sure this is at the top of the file
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
 import { useCart } from '../context/CartContext'
@@ -45,9 +46,7 @@ export default function BestSellers() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products.map((product) =>
-
-          {
+          {products.map((product) => {
             const discountedPrice = product.price - (product.price * product.discount_percentage) / 100
             const sellerName = sellers[product.seller_id] || 'Restaurant name'
 
@@ -56,20 +55,26 @@ export default function BestSellers() {
                 key={product.id}
                 className="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden"
               >
-                <img
-                  src={product.image_url || '/default-food.png'}
-                  alt={product.name}
-                  className="w-full h-48 object-cover"
-                />
+                <Link href={`/product/${product.id}`} className="block hover:opacity-90 transition">
+                  <img
+                    src={product.image_url || '/default-food.png'}
+                    alt={product.name}
+                    className="w-full h-48 object-cover"
+                  />
+                </Link>
+
                 <div className="flex justify-between p-4 space-y-1">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
+                    <Link href={`/product/${product.id}`}>
+                      <h3 className="text-lg font-semibold text-gray-900 hover:underline">{product.name}</h3>
+                    </Link>
                     <p className="text-sm font-bold text-gray-800">{sellerName}</p>
-                    <p className="text-sm text-gray-500">xyz</p>
+                    <p className="text-sm text-gray-500">
+                      Estimated Delivery: {product.estimated_delivery_time ? `${product.estimated_delivery_time} min` : 'N/A'}
+                    </p>
+                    <p className="text-sm text-gray-500">{(product.seller_id)}</p>
 
                     <div className="flex items-center justify-between mt-3">
-
-                      {/* Buttons: Buy Now and Add to Cart */}
                       <div className="flex gap-2">
                         <button
                           onClick={() => addToCart(product.id)}
@@ -86,12 +91,10 @@ export default function BestSellers() {
                       </div>
                     </div>
                   </div>
-                  <div className='flex items-start gap-1'>
-                    {/* Red pill with original price */}
+                  <div className="flex items-start gap-1">
                     <div className="text-black line-through font-semibold text-sm px-3 py-1 rounded-full">
                       ₹{product.price.toFixed(0)}
                     </div>
-                    {/* Green pill with discounted price */}
                     <div className="bg-green-100 text-green-700 font-semibold text-sm px-3 py-1 rounded-full">
                       ₹{discountedPrice.toFixed(0)}
                     </div>

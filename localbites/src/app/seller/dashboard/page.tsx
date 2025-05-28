@@ -25,6 +25,7 @@ export default function SellerDashboard() {
     category: '',
     price: '',
     discount: '',
+    delivery_time: '',
   })
   const [imageFile, setImageFile] = useState<File | null>(null)
 
@@ -94,6 +95,7 @@ export default function SellerDashboard() {
         category: form.category,
         price: parseFloat(form.price),
         discount_percentage: parseFloat(form.discount),
+        estimated_delivery_time: parseInt(form.delivery_time),
         image_url: imageUrl || null,
       },
     ])
@@ -102,7 +104,7 @@ export default function SellerDashboard() {
       setMessage(`❌ Error: ${error.message}`)
     } else {
       setMessage('✅ Product added!')
-      setForm({ name: '', description: '', category: '', price: '', discount: '' })
+      setForm({ name: '', description: '', category: '', price: '', discount: '', delivery_time: '', })
       setImageFile(null)
       fetchProducts()
     }
@@ -143,11 +145,21 @@ export default function SellerDashboard() {
 
         {tab === 'add' && (
           <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
-            <input name="name" value={form.name} onChange={handleChange} type="text" placeholder="Product name" className="w-full p-2 border rounded border-gray-400" required />
-            <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full p-2 border rounded border-gray-400" rows={3} />
-            <input name="category" value={form.category} onChange={handleChange} type="text" placeholder="Category" className="w-full p-2 border rounded border-gray-400" />
-            <input name="price" value={form.price} onChange={handleChange} type="number" step="0.01" placeholder="Price" className="w-full p-2 border rounded border-gray-400" required />
-            <input name="discount" value={form.discount} onChange={handleChange} type="number" step="0.01" placeholder="Discount (%)" className="w-full p-2 border rounded border-gray-400" />
+            <input name="name" value={form.name} onChange={handleChange} type="text" placeholder="Product name" className="w-full placeholder:text-black p-2 border rounded border-gray-400" required />
+            <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full placeholder:text-black p-2 border rounded border-gray-400" rows={3} />
+            <input name="category" value={form.category} onChange={handleChange} type="text" placeholder="Category" className="w-full placeholder:text-black p-2 border rounded border-gray-400" />
+            <input name="price" value={form.price} onChange={handleChange} type="number" step="0.01" placeholder="Price" className="w-full placeholder:text-black p-2 border rounded border-gray-400" required />
+            <input name="discount" value={form.discount} onChange={handleChange} type="number" step="0.01" placeholder="Discount (%)" className="w-full placeholder:text-black p-2 border rounded border-gray-400" />
+            <input
+              name="delivery_time"
+              value={form.delivery_time}
+              onChange={handleChange}
+              type="number"
+              step="1"
+              min="0"
+              placeholder="Estimated Delivery Time (in mins)"
+              className="w-full p-2 placeholder:text-black border rounded border-gray-400"
+            />
             <input type="file" accept="image/*" onChange={handleImageChange} className="w-full border border-gray-300 p-2 rounded" />
             <button type="submit" className="bg-orange-500 text-white px-6 py-2 rounded hover:bg-orange-600">➕ Add Product</button>
           </form>
