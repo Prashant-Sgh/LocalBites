@@ -72,8 +72,7 @@ export default function BestSellers() {
                     <p className="text-sm text-gray-500">
                       Estimated Delivery: {product.estimated_delivery_time ? `${product.estimated_delivery_time} min` : 'N/A'}
                     </p>
-                    <p className="text-sm text-gray-500">{(product.seller_id)}</p>
-
+                    
                     <div className="flex items-center justify-between mt-3">
                       <div className="flex gap-2">
                         <button
